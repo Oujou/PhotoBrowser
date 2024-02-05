@@ -1,11 +1,11 @@
 ﻿namespace PhotoBrowser.Models
 {
-  public class Photo
-  {
-    public int albumId { get; set; }
-    public int id { get; set; }
-    public string title { get; set; }
-    public string url { get; set; }
-    public string thumbnailUrl { get; set; }
-  }
+    public class Photo
+    {
+        public int albumId { get; set; }
+        public int id { get; set; }
+        public string title { get; set; } = string.Empty;
+        public string url { get; set; } = string.Empty;
+        public string thumbnailUrl { get; set; } = string.Empty;
+    }
 }

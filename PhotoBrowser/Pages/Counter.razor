@@ -8,11 +8,21 @@
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
-@code {
-    private int currentCount = 0;
-
-    private void IncrementCount()
+<div>
+    <h2>Users</h2>
+    @foreach(PhotoBrowser.Models.User u in Data.Users)
     {
-        currentCount++;
+        <p>@u.username / @u.email</p>
     }
-}
+    <h2>Albums</h2>
+    @foreach (PhotoBrowser.Models.Album a in Data.Albums)
+    {
+        <p>@a.title</p>
+    }
+    <h2>Photos</h2>
+    @foreach (PhotoBrowser.Models.Photo p in Data.Photos)
+    {
+        <p>@p.title / @p.thumbnailUrl</p>
+    }
+</div>
+
