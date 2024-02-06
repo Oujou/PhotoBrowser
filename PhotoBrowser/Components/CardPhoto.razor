@@ -1,0 +1,9 @@
+﻿@using PhotoBrowser.Models
+
+@if (PhotoData is not null)
+{
+    <div class="photo-card" @onclick="HandlePhotoClick">
+        <img src=@PhotoData.thumbnailUrl />
+        <p>@PhotoData.title</p>
+    </div>
+}

@@ -1,0 +1,15 @@
+﻿@page "/albums"
+
+<h3>Albums</h3>
+
+@if (Data is not null)
+{
+    @foreach (var item in Data.Albums)
+    {
+        <div class="album-card" onclick=@(() => HandleAlbumSelection(@item.id))>
+            <p>@item.title</p>
+            <p>Owner: @Data.Users.First(x => x.id == item.userId).name</p>
+            <p>Photos: @Data.Photos.Where(x => x.albumId == item.id).Count() pcs.</p>
+        </div>
+    }
+}

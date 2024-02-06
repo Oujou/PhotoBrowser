@@ -1,0 +1,21 @@
+﻿@page "/photos"
+@page "/photos/album/{albumId:int}"
+
+<h3>Photos</h3>
+@if (Data is not null)
+{
+    @if (Data.HasPagination)
+    {
+        <button onclick=@(() => Data?.FirstPage())>First</button>
+        <button onclick=@(() => Data?.DecPage())>Prev</button>
+        <span>Page: @Data.Page / @Data.TotalPages</span>
+        <button onclick=@(() => Data?.IncPage())>Next</button>
+        <button onclick=@(() => Data?.LastPage())>Last</button>
+    }
+    <div class="photo-card-holder">
+        @foreach (var item in Data.Photos)
+        {
+            <PhotoBrowser.Components.CardPhoto PhotoData=@item PhotoSelected="HandlePhotoSelection" />
+        }
+    </div>
+}

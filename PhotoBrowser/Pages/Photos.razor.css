@@ -1,0 +1,5 @@
+﻿.photo-card-holder {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}

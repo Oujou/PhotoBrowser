@@ -1,21 +1,15 @@
 using Microsoft.AspNetCore.Components;
-using PhotoBrowser.Models;
 using PhotoBrowser.Services;
 
-namespace PhotoBrowser.Pages
+namespace PhotoBrowser.Layout
 {
-    public partial class Counter
+    public partial class MainLayout
     {
-
         [Inject]
         public IClientService? Client { get; set; }
 
         [Inject]
         public IDataService? Data { get; set; }
-
-        private int currentCount = 0;
-
-        private List<User> users = [];
 
         protected override async Task OnInitializedAsync()
         {
@@ -25,11 +19,6 @@ namespace PhotoBrowser.Pages
                 Data.SetAlbums(await Client.GetAlbums());
                 Data.SetPhotos(await Client.GetPhotos());
             }
-        }
-
-        private void IncrementCount()
-        {
-            currentCount++;
         }
     }
 }

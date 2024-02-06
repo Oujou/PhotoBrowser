@@ -1,0 +1,10 @@
+﻿@page "/photo/{photoId:int}"
+
+<h3>Photo @photo?.title</h3>
+
+@if (photo is not null)
+{
+    <img src=@photo.url />
+}
+<div onclick="history.back()">Back to photos</div>
+

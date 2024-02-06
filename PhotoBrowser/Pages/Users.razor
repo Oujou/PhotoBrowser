@@ -1,0 +1,14 @@
+﻿@page "/users"
+
+<h3>Users</h3>
+
+@if (Data is not null)
+{
+    @foreach (var item in Data.Users)
+    {
+        <div style="border: 1px solid black;">
+            <p>@item.name</p>
+            <p>@item.username</p>
+        </div>
+    }
+}
