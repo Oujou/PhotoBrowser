@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using PhotoBrowser.Models;
+using PhotoBrowser.Services;
 
 namespace PhotoBrowser.Components
 {
@@ -10,6 +11,9 @@ namespace PhotoBrowser.Components
         
         [Parameter]
         public EventCallback<int> PhotoSelected { get; set; }
+
+        [Inject]
+        private IDataService? Data { get; set; }
 
         private void HandlePhotoClick()
         {

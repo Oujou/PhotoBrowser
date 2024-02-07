@@ -16,9 +16,8 @@ namespace PhotoBrowser.Services
         void SetPhotos(List<Photo> photos);
         void SetUsers(List<User> users);
 
-        event Action? OnChange;
-
         int? SelectedAlbumId { get; set; }
+        int? SelectedUserId { get; set; }
      
         // Pagination
         bool HasPagination { get; }
@@ -29,5 +28,7 @@ namespace PhotoBrowser.Services
         void DecPage();
         void FirstPage();
         void LastPage();
+
+        string GetUserNameByAlbum(int id);
     }
 }

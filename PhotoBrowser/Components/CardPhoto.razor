@@ -5,5 +5,7 @@
     <div class="photo-card" @onclick="HandlePhotoClick">
         <img src=@PhotoData.thumbnailUrl />
         <p>@PhotoData.title</p>
+        <p>AlbumId: @PhotoData.albumId</p>
+        <p>Album User: @Data?.GetUserNameByAlbum(PhotoData.albumId)</p>
     </div>
 }

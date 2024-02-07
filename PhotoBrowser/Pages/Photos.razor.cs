@@ -13,12 +13,20 @@ namespace PhotoBrowser.Pages
 
         [Parameter]
         public int? albumId { get; set; }
-
+        
+        [Parameter]
+        public int? userId { get; set; }
+        
         protected override void OnParametersSet()
         {
-            if (Data is not null) Data.SelectedAlbumId = albumId;
+            if (Data is not null)
+            {
+                Data.SelectedAlbumId = albumId;
+                Data.SelectedUserId = userId;
+            }
             base.OnParametersSet();
         }
+
         private void HandlePhotoSelection(int id)
         {
             Nav?.NavigateTo($"/photo/{id}");
