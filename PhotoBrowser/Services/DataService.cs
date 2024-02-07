@@ -11,25 +11,71 @@ namespace PhotoBrowser.Services
 
         public List<Album> Albums => _Albums;
         public List<User> Users => _Users;
-        
+
         public List<Photo> Photos => _photos.Skip(Skip * PageSize).Take(PageSize).ToList();
 
         private List<Photo> _photos
         {
             get
             {
-                List<Photo> list = new List<Photo>();
-                if (SelectedUserId is not null) list = _Photos.Where(photo => _Albums.FindAll(album => album.userId == SelectedUserId).Select(item => item.id).Contains(photo.albumId)).ToList();
-                if (SelectedAlbumId is not null) list = _Photos.Where(photo => photo.albumId == SelectedAlbumId).ToList();
-                if (SelectedUserId is null && SelectedAlbumId is null) list = _Photos;
-                return list;
+                if (SelectedUserId is not null) return _photosByUserId;
+                if (SelectedAlbumId is not null) return _photosByAlbumId;
+                return _Photos;
             }
         }
 
-        public bool HasPagination =>_photos.Count > PageSize;
-        
-        public int? SelectedAlbumId { get; set; }
-        public int? SelectedUserId { get; set; }
+        public bool HasPagination => _photos.Count > PageSize;
+
+        private int? _selectedAlbumId { get; set; }
+        private int? _selectedUserId { get; set; }
+        private List<Photo> _photosByUserId { get; set; } = new();
+        private List<Photo> _photosByAlbumId { get; set; } = new();
+
+        public int? SelectedAlbumId
+        {
+            get
+            {
+                return _selectedAlbumId;
+            }
+            set
+            {
+                if (_selectedAlbumId != value)
+                {
+                    if (value is null)
+                    {
+                        _photosByAlbumId.Clear();
+                    }
+                    else
+                    {
+                        _photosByAlbumId = _Photos.Where(photo => photo.albumId == SelectedAlbumId).ToList();
+                    }
+                    _selectedAlbumId = value;
+                }
+            }
+        }
+
+        public int? SelectedUserId
+        {
+            get
+            {
+                return _selectedUserId;
+            }
+            set
+            {
+                if (_selectedUserId != value)
+                {
+                    if (value is null)
+                    {
+                        _photosByUserId.Clear();
+                    }
+                    else
+                    {
+                        _photosByUserId = _Photos.Where(photo => _Albums.FindAll(album => album.userId == SelectedUserId).Select(item => item.id).Contains(photo.albumId)).ToList();
+                    }
+                    _selectedUserId = value;
+                }
+            }
+        }
 
         public bool HasPhotos => _Photos.Count > 0;
 
