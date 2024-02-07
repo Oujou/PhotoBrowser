@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using PhotoBrowser.Services;
 
 namespace PhotoBrowser.Pages
@@ -10,6 +11,8 @@ namespace PhotoBrowser.Pages
 
         [Inject]
         public NavigationManager? nav { get; set; }
+
+
 
         private void HandleAlbumSelection(int id)
         {

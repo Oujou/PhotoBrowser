@@ -13,7 +13,8 @@ namespace PhotoBrowser.Services
         public List<User> Users => _Users;
 
         public List<Photo> Photos => _photos.Skip(Skip * PageSize).Take(PageSize).ToList();
-
+        
+        public int PhotosCount => _photos.Count;
         private List<Photo> _photos
         {
             get
@@ -39,6 +40,7 @@ namespace PhotoBrowser.Services
             }
             set
             {
+                Console.WriteLine($"SET SelectedAlbumId '{value}' / Old is '{_selectedAlbumId}'");
                 if (_selectedAlbumId != value)
                 {
                     if (value is null)
@@ -47,7 +49,7 @@ namespace PhotoBrowser.Services
                     }
                     else
                     {
-                        _photosByAlbumId = _Photos.Where(photo => photo.albumId == SelectedAlbumId).ToList();
+                        _photosByAlbumId = _Photos.Where(photo => photo.albumId == value).ToList();
                     }
                     _selectedAlbumId = value;
                 }
@@ -123,7 +125,7 @@ namespace PhotoBrowser.Services
             Skip = (_photos.Count - 1) / PageSize;
         }
 
-        public string GetUserNameByAlbum(int id)
+        public string GetUserNameByAlbum(int id) // for Debug
         {
             var user = _Users.Find(user => user.id == _Albums.Find(album => album.id == id)?.userId);
             return user?.name + " / ID: " + user?.id;

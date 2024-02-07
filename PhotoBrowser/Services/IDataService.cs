@@ -8,6 +8,8 @@ namespace PhotoBrowser.Services
         List<Photo> Photos { get; }
         List<User> Users { get; }
 
+        int PhotosCount { get; }
+
         bool HasPhotos { get; }
         bool HasAlbums { get; }
         bool HasUsers { get; }

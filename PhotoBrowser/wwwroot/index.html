@@ -27,6 +27,13 @@
         <a class="dismiss">🗙</a>
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
-</body>
 
+    <script>
+        // When the user clicks the button, the page scrolls to the top
+        window.OnScrollTopEvent = function () {
+            console.log("Foobar");
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+</body>
 </html>

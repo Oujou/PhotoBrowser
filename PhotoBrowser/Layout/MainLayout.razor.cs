@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using PhotoBrowser.Services;
 
 namespace PhotoBrowser.Layout
@@ -10,7 +11,8 @@ namespace PhotoBrowser.Layout
 
         [Inject]
         public IDataService? Data { get; set; }
-
+        
+        
         protected override async Task OnInitializedAsync()
         {
             if (Client != null && Data != null)
@@ -20,5 +22,7 @@ namespace PhotoBrowser.Layout
                 Data.SetPhotos(await Client.GetPhotos());
             }
         }
+
+        
     }
 }

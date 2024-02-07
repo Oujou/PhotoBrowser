@@ -2,21 +2,34 @@
 @page "/photos/album/{albumId:int}"
 @page "/photos/user/{userId:int}"
 
-<h3>Photos</h3>
+<div class="sticky">
+    <h3>Photos</h3>
+    @if (Data != null ? Data.HasPagination : false)
+    {
+        <div class="pagination">
+            <button onclick=@(() => Data?.FirstPage())>First</button>
+            <button onclick=@(() => Data?.DecPage())>Prev</button>
+            <span>Page: @Data.Page / @Data.TotalPages</span>
+            <button onclick=@(() => Data?.IncPage())>Next</button>
+            <button onclick=@(() => Data?.LastPage())>Last</button>
+        </div>
+    }
+    <p class="position-right" @onclick="ScrollToTop">Scroll to top</p>
+</div>
 @if (Data is not null)
 {
-    @if (Data.HasPagination)
-    {
-        <button onclick=@(() => Data?.FirstPage())>First</button>
-        <button onclick=@(() => Data?.DecPage())>Prev</button>
-        <span>Page: @Data.Page / @Data.TotalPages</span>
-        <button onclick=@(() => Data?.IncPage())>Next</button>
-        <button onclick=@(() => Data?.LastPage())>Last</button>
-    }
     <div class="photo-card-holder">
-        @foreach (var item in Data.Photos)
+        @if (Data.Photos.Count > 0)
         {
-            <PhotoBrowser.Components.CardPhoto PhotoData=@item PhotoSelected="HandlePhotoSelection" />
+            @foreach (var item in Data.Photos)
+            {
+                <PhotoBrowser.Components.CardPhoto PhotoData=@item PhotoSelected="HandlePhotoSelection" />
+            }
+
+        }
+        else
+        {
+            <div>No Photos found!</div>
         }
     </div>
 }
