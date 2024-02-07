@@ -12,8 +12,6 @@ namespace PhotoBrowser.Pages
         [Inject]
         public NavigationManager? nav { get; set; }
 
-
-
         private void HandleAlbumSelection(int id)
         {
             Data?.FirstPage();

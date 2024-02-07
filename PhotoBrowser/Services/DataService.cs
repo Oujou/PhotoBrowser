@@ -72,7 +72,7 @@ namespace PhotoBrowser.Services
                     }
                     else
                     {
-                        _photosByUserId = _Photos.Where(photo => _Albums.FindAll(album => album.userId == SelectedUserId).Select(item => item.id).Contains(photo.albumId)).ToList();
+                        _photosByUserId = _Photos.Where(photo => _Albums.FindAll(album => album.userId == value).Select(item => item.id).Contains(photo.albumId)).ToList();
                     }
                     _selectedUserId = value;
                 }

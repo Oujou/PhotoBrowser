@@ -6,10 +6,6 @@
 {
     @foreach (var item in Data.Albums)
     {
-        <div class="album-card" onclick=@(() => HandleAlbumSelection(@item.id))>
-            <p>@item.title</p>
-            <p>Owner: @Data.Users.First(x => x.id == item.userId).name</p>
-            <p>Photos: @Data.Photos.Count() pcs.</p>
-        </div>
+        <PhotoBrowser.Components.CardAlbum AlbumData="@item" AlbumSelected="HandleAlbumSelection" />
     }
 }

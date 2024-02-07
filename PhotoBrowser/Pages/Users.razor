@@ -6,9 +6,6 @@
 {
     @foreach (var item in Data.Users)
     {
-        <div style="border: 1px solid black;" onclick=@(() => HandleUserSelection(@item.id))>
-            <p>@item.name</p>
-            <p>@item.username</p>
-        </div>
+        <PhotoBrowser.Components.CardUser UserData="@item" UserSelected="HandleUserSelection" />
     }
 }

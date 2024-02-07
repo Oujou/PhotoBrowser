@@ -1,0 +1,6 @@
+﻿<div class="album-card" onclick=@(() => HandleAlbumSelection())>
+    <h3>CardAlbum</h3>
+    <p>@AlbumData?.title</p>
+    <p>Owner: @Data?.Users.First(x => x.id == AlbumData?.userId).name</p>
+    <p>Photos: @Data?.Photos.Count() pcs.</p>
+</div>
