@@ -4,8 +4,10 @@
 
 @if (Data is not null)
 {
-    @foreach (var item in Data.Users)
-    {
-        <PhotoBrowser.Components.CardUser UserData="@item" UserSelected="HandleUserSelection" />
-    }
+    <div class="users-container">
+        @foreach (var item in Data.Users)
+        {
+            <PhotoBrowser.Components.CardUser UserData="@item" UserSelected="HandleUserSelection" />
+        }
+    </div>
 }

@@ -1,5 +1,32 @@
-﻿<div style="border: 1px solid black;" onclick=@(() => HandleUserSelection())>
-    <h3>CardUser</h3>
-    <p>@UserData?.name</p>
-    <p>@UserData?.username</p>
+﻿<div class="user-card" onclick=@(() => HandleUserActivation())>
+    @if (Opened)
+    {
+        <div class="card-big">
+            <h3>User</h3>
+            <div class="card-big-container">
+                <div>@UserData?.name</div>
+                <div>@UserData?.username</div>
+                <div>@UserData?.email</div>
+                <div>@UserData?.phone</div>
+                <div>@UserData?.website</div>
+                <div>@UserData?.company?.name</div>
+                <div>@UserData?.company?.catchPhrase</div>
+                <div>@UserData?.company?.bs</div>
+                <div>@UserData?.address?.street</div>
+                <div>@UserData?.address?.suite</div>
+                <div>@UserData?.address?.city</div>
+                <div>@UserData?.address?.zipcode</div>
+                <div>@UserData?.address?.geo?.lat</div>
+                <div>@UserData?.address?.geo?.lng</div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card-small">
+            <h4>User</h4>
+            <p>@UserData?.name</p>
+            <p>@UserData?.username</p>
+        </div>
+    }
 </div>

@@ -15,10 +15,17 @@ namespace PhotoBrowser.Components
         [Inject]
         public NavigationManager? nav { get; set; }
 
+        private bool Opened { get; set; } = false;
 
         private void HandleUserSelection()
         {
             if (UserData is not null) UserSelected.InvokeAsync(UserData.id);
         }
+
+        private void HandleUserActivation()
+        {
+            Opened = !Opened;
+        }
+
     }
 }

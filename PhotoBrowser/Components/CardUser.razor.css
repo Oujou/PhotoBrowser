@@ -1,0 +1,34 @@
+﻿.user-card {
+    border: 1px solid black;
+    border-radius: 1em;
+    padding: 1em;
+}
+
+    .user-card:has(.card-big) {
+
+    }
+
+    .user-card:has(.card-small) {
+
+    }
+
+.card-big-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 1em;
+    grid-row-gap: 1em;
+}
+
+.card-big div {
+    
+}
+
+.card-small {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1em;
+}
+
+.card-small > * {
+
+}
