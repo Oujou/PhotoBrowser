@@ -27,5 +27,10 @@ namespace PhotoBrowser.Components
             Opened = !Opened;
         }
 
+        private void HandleOnClick()
+        {
+            if (UserData is not null) UserSelected.InvokeAsync(UserData.id);
+        }
+
     }
 }

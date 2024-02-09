@@ -16,20 +16,16 @@
     }
     <p class="position-right" @onclick="ScrollToTop">Scroll to top</p>
 </div>
-@if (Data is not null)
+@if (Data.Photos.Count > 0)
 {
     <div class="photo-card-holder">
-        @if (Data.Photos.Count > 0)
+        @foreach (var item in Data.Photos)
         {
-            @foreach (var item in Data.Photos)
-            {
-                <PhotoBrowser.Components.CardPhoto PhotoData=@item PhotoSelected="HandlePhotoSelection" />
-            }
-
-        }
-        else
-        {
-            <div>No Photos found!</div>
+            <PhotoBrowser.Components.CardPhoto PhotoData=@item PhotoSelected="HandlePhotoSelection" />
         }
     </div>
+}
+else
+{
+    <div>Loading...</div>
 }

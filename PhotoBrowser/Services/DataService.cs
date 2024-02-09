@@ -13,14 +13,19 @@ namespace PhotoBrowser.Services
         public List<User> Users => _Users;
 
         public List<Photo> Photos => _photos.Skip(Skip * PageSize).Take(PageSize).ToList();
-        
+        public List<Photo> AllPhotos => _photos;
+
         public int PhotosCount => _photos.Count;
         private List<Photo> _photos
         {
             get
             {
-                if (SelectedUserId is not null) return _photosByUserId;
-                if (SelectedAlbumId is not null) return _photosByAlbumId;
+                Console.WriteLine("Getting photos");
+                Console.WriteLine("_photosByUserId " + (SelectedUserId != null ? SelectedUserId : "null"));
+                Console.WriteLine("_photosByAlbumId " + (SelectedAlbumId != null ? SelectedAlbumId : "null"));
+                if (SelectedUserId != null) return _photosByUserId;
+                if (SelectedAlbumId != null) return _photosByAlbumId;
+                Console.WriteLine($"Returning {_Photos.Count} amount of photos");
                 return _Photos;
             }
         }
@@ -64,6 +69,7 @@ namespace PhotoBrowser.Services
             }
             set
             {
+                Console.WriteLine($"SET SelectedUserId '{value}' / Old is '{_selectedUserId}'");
                 if (_selectedUserId != value)
                 {
                     if (value is null)
@@ -85,19 +91,24 @@ namespace PhotoBrowser.Services
 
         public bool HasUsers => _Users.Count > 0;
 
+        public event Action? OnChange;
+
         public void SetUsers(List<User> users)
         {
             _Users = users;
+            OnChange?.Invoke();
         }
 
         public void SetPhotos(List<Photo> photos)
         {
             _Photos = photos;
+            OnChange?.Invoke();
         }
 
         public void SetAlbums(List<Album> albums)
         {
             _Albums = albums;
+            OnChange?.Invoke();
         }
 
         private int Skip { get; set; } = 0;

@@ -3,7 +3,7 @@ using PhotoBrowser.Services;
 
 namespace PhotoBrowser.Pages
 {
-    public partial class Photo
+    public partial class Photo : IDisposable
     {
         [Inject]
         public IDataService? Data { get; set; }
@@ -13,6 +13,23 @@ namespace PhotoBrowser.Pages
         [Parameter]
         public int photoId { get; set; }
 
-        private PhotoBrowser.Models.Photo? photo => Data?.Photos.FirstOrDefault(x => x.id == photoId);
+        private PhotoBrowser.Models.Photo? photo => Data?.AllPhotos.FirstOrDefault(x => x.id == photoId);
+
+        public void Dispose()
+        {
+            if (Data is not null) Data.OnChange -= Update;
+            GC.SuppressFinalize(this);
+        }
+
+        protected override Task OnInitializedAsync()
+        {
+            if (Data is not null) Data.OnChange += Update;
+            return base.OnInitializedAsync();
+        }
+
+        private void Update()
+        {
+            StateHasChanged();
+        }
     }
 }

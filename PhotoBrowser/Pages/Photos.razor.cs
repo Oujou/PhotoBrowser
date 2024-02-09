@@ -38,7 +38,6 @@ namespace PhotoBrowser.Pages
 
         private async Task ScrollToTop()
         {
-            Console.WriteLine("SCROLLING");
             if (JsRuntime is not null) await JsRuntime.InvokeVoidAsync("OnScrollTopEvent");
         }
     }

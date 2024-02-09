@@ -5,6 +5,9 @@
 @if (photo is not null)
 {
     <img src=@photo.url />
+} 
+else
+{
+    <div>loading...</div>
 }
 <div onclick="history.back()">Back to photos</div>
-

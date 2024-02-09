@@ -94,6 +94,7 @@ namespace PhotoBrowser.Services
             try
             {
                 var response = await Http.GetFromJsonAsync<List<Photo>>($"https://jsonplaceholder.typicode.com/photos", CToken);
+                Console.WriteLine("Photos Get " + response?.Count);
                 if (response is not null)
                 {
                     responseModel.ResponseData = response;

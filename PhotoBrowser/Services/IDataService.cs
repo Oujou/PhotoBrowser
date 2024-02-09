@@ -7,6 +7,9 @@ namespace PhotoBrowser.Services
         List<Album> Albums { get; }
         List<Photo> Photos { get; }
         List<User> Users { get; }
+        List<Photo> AllPhotos { get; }
+
+        public event Action? OnChange;
 
         int PhotosCount { get; }
 
