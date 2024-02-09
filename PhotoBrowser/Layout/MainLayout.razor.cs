@@ -50,9 +50,7 @@ namespace PhotoBrowser.Layout
                     switch (albumResponse.StatusCode)
                     {
                         case ResponseStatus.Success:
-                            Console.WriteLine("Albums " + albumResponse.ResponseData.Count);
                             Data.SetAlbums(albumResponse.ResponseData);
-                            Console.WriteLine("DATA ALBUMS " + Data.Albums.Count);
                             break;
                         case ResponseStatus.Failure:
                             Logger?.LogError(message: albumResponse.ErrorMessage);

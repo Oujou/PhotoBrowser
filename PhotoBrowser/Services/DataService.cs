@@ -20,12 +20,8 @@ namespace PhotoBrowser.Services
         {
             get
             {
-                Console.WriteLine("Getting photos");
-                Console.WriteLine("_photosByUserId " + (SelectedUserId != null ? SelectedUserId : "null"));
-                Console.WriteLine("_photosByAlbumId " + (SelectedAlbumId != null ? SelectedAlbumId : "null"));
                 if (SelectedUserId != null) return _photosByUserId;
                 if (SelectedAlbumId != null) return _photosByAlbumId;
-                Console.WriteLine($"Returning {_Photos.Count} amount of photos");
                 return _Photos;
             }
         }
@@ -45,7 +41,6 @@ namespace PhotoBrowser.Services
             }
             set
             {
-                Console.WriteLine($"SET SelectedAlbumId '{value}' / Old is '{_selectedAlbumId}'");
                 if (_selectedAlbumId != value)
                 {
                     if (value is null)
@@ -69,7 +64,6 @@ namespace PhotoBrowser.Services
             }
             set
             {
-                Console.WriteLine($"SET SelectedUserId '{value}' / Old is '{_selectedUserId}'");
                 if (_selectedUserId != value)
                 {
                     if (value is null)
