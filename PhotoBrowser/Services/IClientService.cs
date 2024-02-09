@@ -2,10 +2,8 @@
 
 namespace PhotoBrowser.Services
 {
-    public interface IClientService
+    public interface IClientService<T>
     {
-        Task<List<User>> GetUsers();
-        Task<List<Album>> GetAlbums();
-        Task<List<Photo>> GetPhotos();
+        Task<ResponseModel<T>> Get(CancellationToken CToken);
     }
 }

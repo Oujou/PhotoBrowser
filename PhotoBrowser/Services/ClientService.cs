@@ -1,69 +1,116 @@
 ﻿using Microsoft.AspNetCore.Components;
 using PhotoBrowser.Models;
+using System;
 using System.Net.Http.Json;
+using System.Threading;
 
 namespace PhotoBrowser.Services
 {
-    public class ClientService : IClientService
+    public class UserService : IClientService<User>
     {
         private HttpClient Http { get; set; }
 
-        public ClientService(HttpClient http) { 
+        public UserService(HttpClient http)
+        {
             Http = http;
         }
 
-        public async Task<List<User>> GetUsers()
+        public async Task<ResponseModel<User>> Get(CancellationToken CToken)
         {
-            CancellationToken cancellationToken = new();
+            ResponseModel<User> responseModel = new ResponseModel<User>();
+
             try
             {
-                var response = await Http.GetFromJsonAsync<List<User>>("https://jsonplaceholder.typicode.com/users", cancellationToken);
+                var response = await Http.GetFromJsonAsync<List<User>>($"https://jsonplaceholder.typicode.com/users", CToken);
                 if (response is not null)
                 {
-                    return response;
+                    responseModel.ResponseData = response;
+                    responseModel.StatusCode = ResponseStatus.Success;
+                }
+                else
+                {
+                    responseModel.StatusCode = ResponseStatus.Failure;
+                    responseModel.ErrorMessage = "Response from server was invalid";
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine($"{e.Message}");
+                responseModel.ErrorMessage = "Error at data transfer.";
+                responseModel.StatusCode = ResponseStatus.Failure;
             }
-            return [];
+            return responseModel;
+        }
+    }
+
+    public class AlbumService : IClientService<Album>
+    {
+        private HttpClient Http { get; set; }
+
+        public AlbumService(HttpClient http)
+        {
+            Http = http;
         }
 
-        public async Task<List<Album>> GetAlbums()
+        public async Task<ResponseModel<Album>> Get(CancellationToken CToken)
         {
-            CancellationToken cancellationToken = new();
+            ResponseModel<Album> responseModel = new ResponseModel<Album>();
+
             try
             {
-                var response = await Http.GetFromJsonAsync<List<Album>>("https://jsonplaceholder.typicode.com/albums", cancellationToken);
+                var response = await Http.GetFromJsonAsync<List<Album>>($"https://jsonplaceholder.typicode.com/albums", CToken);
                 if (response is not null)
                 {
-                    return response;
+                    responseModel.ResponseData = response;
+                    responseModel.StatusCode = ResponseStatus.Success;
+                }
+                else
+                {
+                    responseModel.StatusCode = ResponseStatus.Failure;
+                    responseModel.ErrorMessage = "Response from server was invalid";
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine($"{e.Message}");
+                responseModel.ErrorMessage = "Error at data transfer.";
+                responseModel.StatusCode = ResponseStatus.Failure;
             }
-            return [];
+            return responseModel;
+        }
+    }
+
+    public class PhotoService : IClientService<Photo>
+    {
+        private HttpClient Http { get; set; }
+
+        public PhotoService(HttpClient http)
+        {
+            Http = http;
         }
 
-        public async Task<List<Photo>> GetPhotos()
+        public async Task<ResponseModel<Photo>> Get(CancellationToken CToken)
         {
-            CancellationToken cancellationToken = new();
+            ResponseModel<Photo> responseModel = new ResponseModel<Photo>();
+
             try
             {
-                var response = await Http.GetFromJsonAsync<List<Photo>>("https://jsonplaceholder.typicode.com/photos", cancellationToken);
+                var response = await Http.GetFromJsonAsync<List<Photo>>($"https://jsonplaceholder.typicode.com/photos", CToken);
                 if (response is not null)
                 {
-                    return response;
+                    responseModel.ResponseData = response;
+                    responseModel.StatusCode = ResponseStatus.Success;
+                }
+                else
+                {
+                    responseModel.StatusCode = ResponseStatus.Failure;
+                    responseModel.ErrorMessage = "Response from server was invalid";
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine($"{e.Message}");
+                responseModel.ErrorMessage = "Error at data transfer.";
+                responseModel.StatusCode = ResponseStatus.Failure;
             }
-            return [];
+            return responseModel;
         }
     }
 }
