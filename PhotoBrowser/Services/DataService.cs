@@ -44,7 +44,7 @@ namespace PhotoBrowser.Services
 
         public ResponseStatus ResponseStatus { get; private set; }
 
-        public string ErrorMessage { get; private set; }
+        public string ErrorMessage { get; private set; } = string.Empty;
 
         private async Task<List<User>> GetUsers()
         {

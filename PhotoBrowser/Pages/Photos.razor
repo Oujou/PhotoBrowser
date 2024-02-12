@@ -16,7 +16,7 @@
     }
     <p class="position-right" @onclick="ScrollToTop">Scroll to top</p>
 </div>
-@if (Data.HasPhotos)
+@if (Data != null && Data.HasPhotos)
 {
     if (Data.Photos.Count > 0)
     {
