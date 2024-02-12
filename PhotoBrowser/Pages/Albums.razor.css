@@ -1,1 +1,7 @@
-﻿
+﻿.album-row {
+    background-color: azure;
+}
+
+    .album-row:nth-child(2n+1) {
+        background-color: lightcyan;
+    }

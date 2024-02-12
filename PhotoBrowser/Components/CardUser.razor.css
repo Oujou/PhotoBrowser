@@ -1,34 +1,49 @@
-﻿.user-card {
-    border: 1px solid black;
-    border-radius: 1em;
+﻿.card-content {
+    background-color: #FAFAFA;
+    border-top: 1px solid black;
+    padding-left: 1em;
+    padding-block: 1em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "name company"
+        "address address"
+        "control control";
+}
+
+.card-content.hidden {
+    height: 0px;
+    display: none;
+}
+
+.card-title {
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
     padding: 1em;
-}
-
-    .user-card:has(.card-big) {
-
-    }
-
-    .user-card:has(.card-small) {
-
-    }
-
-.card-big-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 1em;
-    grid-row-gap: 1em;
-}
-
-.card-big div {
-    
-}
-
-.card-small {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
     gap: 1em;
+    margin-bottom: 0 !important;
 }
 
-.card-small > * {
+.card-title > img {
+    width: 1.2rem;
+    height: 1.2rem;
+}
 
+.card-contact {
+    grid-area: name;
+}
+
+.card-company {
+    grid-area: company;
+}
+
+.card-address {
+    grid-area: address;
+}
+
+.card-control {
+    grid-area: control;
 }

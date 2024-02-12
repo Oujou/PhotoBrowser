@@ -130,10 +130,32 @@ namespace PhotoBrowser.Services
             Skip = (_photos.Count - 1) / PageSize;
         }
 
-        public string GetUserNameByAlbum(int id) // for Debug
+        public string GetUserNameByAlbum(int id)
         {
-            var user = _Users.Find(user => user.id == _Albums.Find(album => album.id == id)?.userId);
-            return user?.name + " / ID: " + user?.id;
+            try
+            {
+                var user = _Users.Find(user => user.id == _Albums.Find(album => album.id == id)?.userId);
+                return user?.name ?? "";
+
+            }
+            catch (ArgumentNullException)
+            {
+                return "";
+            }
+        }
+
+        public int GetPhotoCountByAlbum(int id)
+        {
+            try
+            {
+                var photoCount = _Photos.FindAll(x => x.albumId == id).Count;
+                return photoCount;
+
+            }
+            catch (ArgumentNullException)
+            {
+                return 0;
+            }
         }
     }
 }

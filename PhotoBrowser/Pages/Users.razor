@@ -7,7 +7,13 @@
     <div class="users-container">
         @foreach (var item in Data.Users)
         {
-            <PhotoBrowser.Components.CardUser UserData="@item" UserSelected="HandleUserSelection" />
+            <div class="card-row">
+                <PhotoBrowser.Components.CardUser 
+                    UserData=@item 
+                    Selected=IsSelected(item.id)
+                    UserSelected="HandleUserSelection" 
+                    UserClicked="HandleUserToggle"/>
+            </div>
         }
     </div>
 }

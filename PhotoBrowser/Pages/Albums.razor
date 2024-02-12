@@ -1,15 +1,15 @@
 ﻿@page "/albums"
 
 <h3>Albums</h3>
-<div>BAR VAR</div>
 @if (Data is not null)
 {
-    <h4>Foo Foo</h4>
     @foreach (var item in Data.Albums)
     {
-        <PhotoBrowser.Components.CardAlbum AlbumData="@item" AlbumSelected="HandleAlbumSelection" />
+        <div class="album-row">
+            <PhotoBrowser.Components.CardAlbum AlbumData="@item" AlbumSelected="HandleAlbumSelection" />
+        </div>
     }
-} 
+}
 else
 {
     <h4>BAA BAA</h4>

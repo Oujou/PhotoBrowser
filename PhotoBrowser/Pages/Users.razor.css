@@ -1,3 +1,6 @@
-﻿.users-container {
-
+﻿.card-row {
+    background-color: azure;
+}
+.card-row:nth-child(2n+1) {
+    background-color: lightcyan;
 }

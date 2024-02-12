@@ -5,9 +5,12 @@
 @if (photo is not null)
 {
     <img src=@photo.url />
-} 
+    <PhotoBrowser.Components.Label Title="Owner" OnClick=@UserClick>
+        <button>@Owner</button>
+    </PhotoBrowser.Components.Label>
+}
 else
 {
     <div>loading...</div>
 }
-<div onclick="history.back()">Back to photos</div>
+<button onclick="history.back()">Back to photos</button>

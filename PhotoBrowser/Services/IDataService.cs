@@ -35,5 +35,6 @@ namespace PhotoBrowser.Services
         void LastPage();
 
         string GetUserNameByAlbum(int id);
+        int GetPhotoCountByAlbum(int id);
     }
 }

@@ -3,9 +3,8 @@
 @if (PhotoData is not null)
 {
     <div class="photo-card" @onclick="HandlePhotoClick">
-        <img src=@PhotoData.thumbnailUrl />
-        <p>@PhotoData.title</p>
-        <p>AlbumId: @PhotoData.albumId</p>
-        <p>Album User: @Data?.GetUserNameByAlbum(PhotoData.albumId)</p>
+        <div class="image"><img src=@PhotoData.thumbnailUrl /></div>
+        <Label Title="Title">@PhotoData.title</Label>
+        <Label Title="Owner">@Data?.GetUserNameByAlbum(PhotoData.albumId)</Label>
     </div>
 }

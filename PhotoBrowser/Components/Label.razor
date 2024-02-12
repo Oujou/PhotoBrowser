@@ -1,0 +1,13 @@
+﻿<div class="label-container">
+    <div class="title">@Title</div>
+    <div class="content" onclick=@(() => @OnClick.InvokeAsync())>@ChildContent</div>
+</div>
+
+@code {
+    [Parameter]
+    public string Title { get; set; } = string.Empty;
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+    [Parameter]
+    public EventCallback OnClick { get; set; }
+}

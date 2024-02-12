@@ -11,11 +11,17 @@ namespace PhotoBrowser.Components
 
         [Parameter]
         public EventCallback<int> UserSelected { get; set; }
+        [Parameter]
+        public EventCallback<int> UserClicked { get; set; }
 
         [Inject]
         public NavigationManager? nav { get; set; }
 
-        private bool Opened { get; set; } = false;
+        [Parameter]
+        public bool Selected { get; set; } = false;
+
+        private string CardClass => Selected ? "card-content" : "card-content hidden";
+        private string CardOpened => Selected ? "ArrowRight.png" : "ArrowDown.png";
 
         private void HandleUserSelection()
         {
@@ -24,7 +30,7 @@ namespace PhotoBrowser.Components
 
         private void HandleUserActivation()
         {
-            Opened = !Opened;
+            if (UserData is not null) UserClicked.InvokeAsync(UserData.id);
         }
 
         private void HandleOnClick()

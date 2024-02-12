@@ -1,33 +1,33 @@
-﻿<div class="user-card" onclick=@(() => HandleUserActivation())>
-    @if (Opened)
-    {
-        <div class="card-big">
-            <h3>User</h3>
-            <div class="card-big-container">
-                <div>@UserData?.name</div>
-                <div>@UserData?.username</div>
-                <div>@UserData?.email</div>
-                <div>@UserData?.phone</div>
-                <div>@UserData?.website</div>
-                <div>@UserData?.company?.name</div>
-                <div>@UserData?.company?.catchPhrase</div>
-                <div>@UserData?.company?.bs</div>
-                <div>@UserData?.address?.street</div>
-                <div>@UserData?.address?.suite</div>
-                <div>@UserData?.address?.city</div>
-                <div>@UserData?.address?.zipcode</div>
-                <div>@UserData?.address?.geo?.lat</div>
-                <div>@UserData?.address?.geo?.lng</div>
-                <button @onclick=HandleOnClick>Katohhan kuvia</button>
+﻿<div class="card-container">
+    <div class="card-title" onclick=@(() => HandleUserActivation())>
+        <img src="@CardOpened" />
+        <span>User:</span>
+        <span>@UserData?.name</span>
+        <span>@UserData?.username</span>
+    </div>
+    <div class=@CardClass>
+        <div class="card-contact">
+            <Label Title="Email">@UserData?.email</Label>
+                <Label Title="Phone">@UserData?.phone</Label>
+                <Label Title="Website">@UserData?.website</Label>
+
             </div>
+            <div class="card-company">
+                <Label Title="Name">@UserData?.company?.name</Label>
+            <Label Title="Phrase">@UserData?.company?.catchPhrase</Label>
+            <Label Title="Bs">@UserData?.company?.bs</Label>
         </div>
-    }
-    else
-    {
-        <div class="card-small">
-            <h4>User</h4>
-            <p>@UserData?.name</p>
-            <p>@UserData?.username</p>
+        <div class="card-address">
+                <Label Title="Street">@UserData?.address?.street</Label>
+                <Label Title="Suite">@UserData?.address?.suite</Label>
+                <Label Title="City">@UserData?.address?.city</Label>
+                <Label Title="Zip">@UserData?.address?.zipcode</Label>
+                <Label Title="Lat">@UserData?.address?.geo?.lat</Label>
+                <Label Title="Long">@UserData?.address?.geo?.lng</Label>
+
         </div>
-    }
+        <div class="card-control">
+            <button @onclick=HandleOnClick>Show user images</button>
+        </div>
+    </div>
 </div>
