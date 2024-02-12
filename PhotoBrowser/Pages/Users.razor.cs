@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 namespace PhotoBrowser.Pages
 {
-    public partial class Users
+    public partial class Users : IDisposable
     {
         [Inject]
         public IDataService? Data { get; set; }
@@ -21,8 +21,18 @@ namespace PhotoBrowser.Pages
 
         private bool IsSelected(int id) => SelectedUser == id;
 
-        protected override void OnParametersSet()
+        protected override Task OnInitializedAsync()
         {
+            if (Data is not null) Data.OnChange += Update;
+            return base.OnInitializedAsync();
+        }
+
+        protected override async Task OnParametersSetAsync()
+        {
+            if (Data != null)
+            {
+                await Data.UpdateData();
+            }
             if (user != null)
             {
                 try
@@ -45,8 +55,23 @@ namespace PhotoBrowser.Pages
 
         private void HandleUserToggle(int id)
         {   
+            if (SelectedUser == id)
+            {
+                id = -1;
+            }
             SelectedUser = id;
             nav?.NavigateTo("/users?user=" + id);
+        }
+
+        private void Update()
+        {
+            StateHasChanged();
+        }
+
+        public void Dispose()
+        {
+            if (Data is not null) Data.OnChange -= Update;
+            GC.SuppressFinalize(this);
         }
     }
 }

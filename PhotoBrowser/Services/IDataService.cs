@@ -4,6 +4,14 @@ namespace PhotoBrowser.Services
 {
     public interface IDataService
     {
+        IClientService<User>? UserService { get; set; }
+        IClientService<Photo>? PhotoService { get; set; }
+        IClientService<Album>? AlbumService { get; set; }
+        
+        ResponseStatus ResponseStatus { get; }
+        string ErrorMessage { get; }
+
+        Task UpdateData();
         List<Album> Albums { get; }
         List<Photo> Photos { get; }
         List<User> Users { get; }
@@ -23,7 +31,7 @@ namespace PhotoBrowser.Services
 
         int? SelectedAlbumId { get; set; }
         int? SelectedUserId { get; set; }
-     
+
         // Pagination
         bool HasPagination { get; }
         int Page { get; }

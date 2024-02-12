@@ -11,6 +11,13 @@
 }
 else
 {
-    <div>loading...</div>
+    @if (Data?.ResponseStatus == Models.ResponseStatus.Failure)
+    {
+        <div>There has been error: @Data.ErrorMessage</div>
+    } 
+    else
+    {
+        <div>loading...</div>
+    }
 }
 <button onclick="history.back()">Back to photos</button>

@@ -33,7 +33,7 @@ namespace PhotoBrowser.Services
                     responseModel.ErrorMessage = "Response from server was invalid";
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 responseModel.ErrorMessage = "Error at data transfer.";
                 responseModel.StatusCode = ResponseStatus.Failure;
@@ -69,7 +69,7 @@ namespace PhotoBrowser.Services
                     responseModel.ErrorMessage = "Response from server was invalid";
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 responseModel.ErrorMessage = "Error at data transfer.";
                 responseModel.StatusCode = ResponseStatus.Failure;
@@ -105,7 +105,7 @@ namespace PhotoBrowser.Services
                     responseModel.ErrorMessage = "Response from server was invalid";
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 responseModel.ErrorMessage = "Error at data transfer.";
                 responseModel.StatusCode = ResponseStatus.Failure;

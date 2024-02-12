@@ -15,7 +15,16 @@ namespace PhotoBrowser.Pages
         public int photoId { get; set; }
 
         private PhotoBrowser.Models.Photo? photo => Data?.AllPhotos.FirstOrDefault(x => x.id == photoId);
-        private string Owner => Data?.GetUserNameByAlbum(photo.albumId) ?? "";
+        private string Owner
+        {
+            get
+            {
+                if (photo is not null && Data is not null) 
+                    return Data.GetUserNameByAlbum(photo.albumId);
+                return "";
+            }
+        }
+
         public void Dispose()
         {
             if (Data is not null) Data.OnChange -= Update;
@@ -37,12 +46,17 @@ namespace PhotoBrowser.Pages
         {
             try
             {
-                var userId = Data?.Albums.Find(x => x.id == photo.albumId)?.userId;
+                var userId = Data?.Albums.Find(x => x.id == photo?.albumId)?.userId;
                 nav?.NavigateTo("/users?user=" + userId);
             }
             catch (ArgumentNullException)
             {
             }
+        }
+
+        protected override async Task OnParametersSetAsync()
+        {
+            if (Data != null) await Data.UpdateData();
         }
     }
 }

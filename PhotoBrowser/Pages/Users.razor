@@ -4,6 +4,9 @@
 
 @if (Data is not null)
 {
+    @if (Data.HasUsers)
+    {
+        
     <div class="users-container">
         @foreach (var item in Data.Users)
         {
@@ -15,5 +18,17 @@
                     UserClicked="HandleUserToggle"/>
             </div>
         }
-    </div>
+        </div>
+    }
+    else
+    {
+        @if (Data?.ResponseStatus == Models.ResponseStatus.Failure)
+        {
+            <div>There has been error: @Data.ErrorMessage</div>
+        }
+        else
+        {
+            <div>loading...</div>
+        }
+    }
 }

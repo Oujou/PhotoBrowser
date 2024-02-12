@@ -3,14 +3,24 @@
 <h3>Albums</h3>
 @if (Data is not null)
 {
-    @foreach (var item in Data.Albums)
+    @if (Data.HasAlbums)
     {
-        <div class="album-row">
-            <PhotoBrowser.Components.CardAlbum AlbumData="@item" AlbumSelected="HandleAlbumSelection" />
-        </div>
+        @foreach (var item in Data.Albums)
+        {
+            <div class="album-row">
+                <PhotoBrowser.Components.CardAlbum AlbumData="@item" AlbumSelected="HandleAlbumSelection" />
+            </div>
+        }
     }
-}
-else
-{
-    <h4>BAA BAA</h4>
+    else
+    {
+        @if (Data?.ResponseStatus == Models.ResponseStatus.Failure)
+        {
+            <div>There has been error: @Data.ErrorMessage</div>
+        }
+        else
+        {
+            <div>loading...</div>
+        }
+    }
 }

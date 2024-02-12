@@ -1,10 +1,18 @@
-﻿using PhotoBrowser.Models;
+﻿using Microsoft.AspNetCore.Components;
+using PhotoBrowser.Models;
 using System.Reflection;
 
 namespace PhotoBrowser.Services
 {
     public class DataService : IDataService
     {
+        public IClientService<User>? UserService { get; set; }
+        public IClientService<Photo>? PhotoService { get; set; }
+        public IClientService<Album>? AlbumService { get; set; }
+
+        [Inject]
+        public ILogger<DataService>? Logger { get; set; }
+
         private List<User> _Users { get; set; } = new List<User>();
         private List<Photo> _Photos { get; set; } = new List<Photo>();
         private List<Album> _Albums { get; set; } = new List<Album>();
@@ -24,6 +32,93 @@ namespace PhotoBrowser.Services
                 if (SelectedAlbumId != null) return _photosByAlbumId;
                 return _Photos;
             }
+        }
+
+        public async Task UpdateData()
+        {
+            if (!HasAlbums) _Albums = await GetAlbums();
+            if (!HasUsers) _Users = await GetUsers();
+            if (!HasPhotos) _Photos = await GetPhotos();
+            OnChange?.Invoke();
+        }
+
+        public ResponseStatus ResponseStatus { get; private set; }
+
+        public string ErrorMessage { get; private set; }
+
+        private async Task<List<User>> GetUsers()
+        {
+            if (UserService == null) return new List<User>();
+            var userResponse = await UserService.Get(CancellationToken.None);
+            if (userResponse != null)
+            {
+                switch (userResponse.StatusCode)
+                {
+                    case ResponseStatus.Success:
+                        ResponseStatus = ResponseStatus.Success;
+                        ErrorMessage = string.Empty;
+                        return userResponse.ResponseData;
+                    case ResponseStatus.Failure:
+                        Logger?.LogError(message: userResponse.ErrorMessage);
+                        break;
+                    default:
+                        Logger?.LogError(message: "Error in response status.");
+                        break;
+                }
+                ResponseStatus = ResponseStatus.Failure;
+                ErrorMessage = userResponse.ErrorMessage;
+            }
+            return new List<User>();
+        }
+
+        private async Task<List<Photo>> GetPhotos()
+        {
+            if (PhotoService == null) return new List<Photo>();
+            var photoResponse = await PhotoService.Get(CancellationToken.None);
+            if (photoResponse != null)
+            {
+                switch (photoResponse.StatusCode)
+                {
+                    case ResponseStatus.Success:
+                        ResponseStatus = ResponseStatus.Success;
+                        ErrorMessage = string.Empty;
+                        return photoResponse.ResponseData;
+                    case ResponseStatus.Failure:
+                        Logger?.LogError(message: photoResponse.ErrorMessage);
+                        break;
+                    default:
+                        Logger?.LogError(message: "Error in response status.");
+                        break;
+                }
+                ResponseStatus = ResponseStatus.Failure;
+                ErrorMessage = photoResponse.ErrorMessage;
+            }
+            return new List<Photo>();
+        }
+
+        private async Task<List<Album>> GetAlbums()
+        {
+            if (AlbumService == null) return new List<Album>();
+            var albumResponse = await AlbumService.Get(CancellationToken.None);
+            if (albumResponse != null)
+            {
+                switch (albumResponse.StatusCode)
+                {
+                    case ResponseStatus.Success:
+                        ResponseStatus = ResponseStatus.Success;
+                        ErrorMessage = string.Empty;
+                        return albumResponse.ResponseData;
+                    case ResponseStatus.Failure:
+                        Logger?.LogError(message: albumResponse.ErrorMessage);
+                        break;
+                    default:
+                        Logger?.LogError(message: "Error in response status.");
+                        break;
+                }
+                ResponseStatus = ResponseStatus.Failure;
+                ErrorMessage = albumResponse.ErrorMessage;
+            }
+            return new List<Album>();
         }
 
         public bool HasPagination => _photos.Count > PageSize;
@@ -109,6 +204,8 @@ namespace PhotoBrowser.Services
         private int PageSize { get; set; } = 25;
         public int Page => Skip + 1;
         public int TotalPages => _photos.Count / PageSize;
+
+
 
         public void IncPage()
         {

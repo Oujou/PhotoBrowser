@@ -16,16 +16,32 @@
     }
     <p class="position-right" @onclick="ScrollToTop">Scroll to top</p>
 </div>
-@if (Data.Photos.Count > 0)
+@if (Data.HasPhotos)
 {
-    <div class="photo-card-holder">
-        @foreach (var item in Data.Photos)
-        {
-            <PhotoBrowser.Components.CardPhoto PhotoData=@item PhotoSelected="HandlePhotoSelection" />
-        }
-    </div>
+    if (Data.Photos.Count > 0)
+    {
+        <div class="photo-card-holder">
+            @foreach (var item in Data.Photos)
+            {
+                <PhotoBrowser.Components.CardPhoto PhotoData
+                =@item PhotoSelected
+                ="HandlePhotoSelection" />
+            }
+        </div>
+    } 
+    else
+    {
+        <div>Sorry, no photos for @ForWhat</div>    
+    }
 }
 else
 {
-    <div>Loading...</div>
+    @if (Data?.ResponseStatus == Models.ResponseStatus.Failure)
+    {
+        <div>There has been error: @Data.ErrorMessage</div>
+    }
+    else
+    {
+        <div>loading...</div>
+    }
 }
