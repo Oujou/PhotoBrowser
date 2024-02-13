@@ -1,6 +1,6 @@
 ﻿.card-row {
-    background-color: azure;
+    background-color: var(--secondary-color);
 }
-.card-row:nth-child(2n+1) {
-    background-color: lightcyan;
-}
+    .card-row:nth-child(2n+1) {
+        background-color: var(--primary-color);
+    }

@@ -1,7 +1,7 @@
 ﻿.album-row {
-    background-color: azure;
+    background-color: var(--secondary-color);
 }
 
     .album-row:nth-child(2n+1) {
-        background-color: lightcyan;
+        background-color: var(--primary-color);
     }

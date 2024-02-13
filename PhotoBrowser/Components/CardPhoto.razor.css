@@ -1,6 +1,6 @@
 ﻿.photo-card {
     width: 200px;
-    padding: 1em;
+    padding: var(--padding);
     display: flex;
     flex-direction: column;
     cursor: pointer;

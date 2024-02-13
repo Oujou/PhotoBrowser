@@ -1,8 +1,9 @@
 ﻿.card-content {
-    background-color: #FAFAFA;
-    border-top: 1px solid black;
-    padding-left: 1em;
-    padding-block: 1em;
+    background-color: var(--primary-bg-color-dark);
+    border-top: var(--border);
+    padding-left: var(--padding);
+    padding-left: var(--padding);
+    padding-block: var(--padding);
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -22,8 +23,8 @@
     cursor: pointer;
     display: flex;
     flex-wrap: wrap;
-    padding: 1em;
-    gap: 1em;
+    padding: var(--padding);
+    gap: var(--gap);
     margin-bottom: 0 !important;
 }
 

@@ -1,0 +1,14 @@
+﻿:root {
+    --primary-color: #c4fff4;
+    --secondary-color: #85ccbf;
+    --primary-bg-color: #FFFFFF;
+    --primary-bg-color-dark: #FAFAFA;
+    --primary-bg-color-darker: #F7F7F7;
+    --primary-bg-color-darkest: #D6D5D5;
+    --border-radius: 1em;
+    --padding: 1em;
+    --margin: 1em;
+    --gap: 1em;
+    --border: 1px solid black;
+    --font-weight-bold: 700;
+}
